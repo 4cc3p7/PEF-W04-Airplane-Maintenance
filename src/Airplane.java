@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 
 public class Airplane {
 
@@ -5,6 +6,8 @@ public class Airplane {
     private int currentPassengerCount;
     private int currentAltitude; // in feet
     private double currentSpeed; // in knots
+    private LocalDateTime lastMaintenance;
+    private double totalLuggageWeight = 0.0;
 
     public Airplane(String airplaneType) {
         this.airplaneType = airplaneType;
@@ -34,6 +37,14 @@ public class Airplane {
         this.currentSpeed = targetSpeed;
     }
 
+    public double getTotalLuggageWeight() {
+        return totalLuggageWeight;
+    }
+
+    public void loadLuggage(luggage luggage){
+        this.totalLuggageWeight += luggage.getWeight();
+    }
+
     public void land() {
         this.currentAltitude = 0;
         this.currentSpeed = 0;
@@ -47,5 +58,13 @@ public class Airplane {
     public int boarding(int passengers) {
         this.currentPassengerCount += passengers;
         return this.currentPassengerCount;
+    }
+
+    public LocalDateTime getLastMaintenance() {
+        return lastMaintenance;
+    }
+
+    public void setLastMaintenance(LocalDateTime lastMaintenance) {
+        this.lastMaintenance = lastMaintenance;
     }
 }
